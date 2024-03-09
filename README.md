@@ -59,7 +59,6 @@ http://localhost:8080/api/v1/search?surname=Jo
 http://localhost:8080/h2-console
 - JDBC URL: jdbc:h2:mem:comparus
 - User Name: sa
-<br>
 - JDBC URL: jdbc:h2:mem:comparus2
 - USer Name: sa
 
