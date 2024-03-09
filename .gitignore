@@ -23,6 +23,7 @@
 hs_err_pid*
 replay_pid*
 /business/target/
+/api/target/
 /.idea/
 .DS_Store
 
