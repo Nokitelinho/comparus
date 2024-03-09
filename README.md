@@ -12,7 +12,7 @@ Download and unzip the source repository or clone it using Git: <br>
 ``git clone https://github.com/Nokitelinho/comparus.git``
 
 ## Test the Application
-Using the Maven plugin:<br>
+Using the Maven plugin open project and from README click:<br>
 ``` mvn clean install ```
 ``` mvn spring-boot:run -pl business```
 <br>OR<br>
