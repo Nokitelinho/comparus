@@ -20,52 +20,52 @@ import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(
-		entityManagerFactoryRef = "primaryEntityManagerFactory",
-		transactionManagerRef = "primaryTransactionManager",
-		basePackages = {"com.comparus.primary.repo"}
-		)
+        entityManagerFactoryRef = "primaryEntityManagerFactory",
+        transactionManagerRef = "primaryTransactionManager",
+        basePackages = {"com.comparus.primary.repo"}
+)
 public class PrimaryDatabaseConnection {
-	
-	@Value("${spring.primary.datasource.url}")
+
+    @Value("${spring.primary.datasource.url}")
     private String url;
-	
-	@Value("${spring.primary.datasource.username}")
+
+    @Value("${spring.primary.datasource.username}")
     private String username;
-	
-	@Value("${spring.primary.datasource.password}")
+
+    @Value("${spring.primary.datasource.password}")
     private String password;
-	
-	
-	@Primary
-	@Bean(name = "primaryDbDataSource")
-    public DataSource primaryDbDataSource(){
+
+
+    @Primary
+    @Bean(name = "primaryDbDataSource")
+    public DataSource primaryDbDataSource() {
         return DataSourceBuilder.create()
-        		.url(url)
-        		.username(username)
-        		.password(password)
-        		.build();
+                .url(url)
+                .username(username)
+                .password(password)
+                .build();
     }
-	
-	@Primary
-	@Bean(name = "primaryEntityManagerFactory")
-	public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory(
-			EntityManagerFactoryBuilder builder,
-			@Qualifier("primaryDbDataSource") DataSource primaryDataSource) {
-		Map<String, String> props = new HashMap<>();
-		props.put("hibernate.physical_naming_strategy"
-				, CamelCaseToUnderscoresNamingStrategy.class.getName());
-		return builder
-				.dataSource(primaryDataSource)
-				.packages("com.comparus.primary.models")
-				.properties(props)
-				.build();
-	}
-	
-	@Primary
-	@Bean(name = "primaryTransactionManager")
-	public PlatformTransactionManager primaryTransactionManager(
-			@Qualifier("primaryEntityManagerFactory") EntityManagerFactory
-			primaryEntityManagerFactory) {
-		return new JpaTransactionManager(primaryEntityManagerFactory);
-	}
+
+    @Primary
+    @Bean(name = "primaryEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory(
+            EntityManagerFactoryBuilder builder,
+            @Qualifier("primaryDbDataSource") DataSource primaryDataSource) {
+        Map<String, String> props = new HashMap<>();
+        props.put("hibernate.physical_naming_strategy"
+                , CamelCaseToUnderscoresNamingStrategy.class.getName());
+        return builder
+                .dataSource(primaryDataSource)
+                .packages("com.comparus.primary.models")
+                .properties(props)
+                .build();
+    }
+
+    @Primary
+    @Bean(name = "primaryTransactionManager")
+    public PlatformTransactionManager primaryTransactionManager(
+            @Qualifier("primaryEntityManagerFactory") EntityManagerFactory
+                    primaryEntityManagerFactory) {
+        return new JpaTransactionManager(primaryEntityManagerFactory);
+    }
 }

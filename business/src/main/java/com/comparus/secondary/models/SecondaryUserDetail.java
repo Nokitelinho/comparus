@@ -7,19 +7,19 @@ import java.util.UUID;
 
 @Getter
 @Entity
-@Table(name="user_detail")
+@Table(name = "user_detail")
 public class SecondaryUserDetail {
-	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
-	@Column(name="user_id")
-	private UUID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "user_id")
+    private UUID id;
 
-	@Column(name="login")
-	private String username;
+    @Column(name = "login")
+    private String username;
 
-	@Column(name="first_name")
-	private String name;
+    @Column(name = "first_name")
+    private String name;
 
-	@Column(name="last_name")
-	private String surname;
+    @Column(name = "last_name")
+    private String surname;
 }

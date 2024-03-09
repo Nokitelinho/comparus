@@ -6,11 +6,13 @@ import org.springframework.data.jpa.domain.Specification;
 import java.util.UUID;
 
 public class SecondaryUserSpecification {
-    private SecondaryUserSpecification() {}
+    private SecondaryUserSpecification() {
+    }
 
     public static Specification<SecondaryUserDetail> uuidEqual(UUID uuid) {
         return (root, query, builder) -> builder.equal(root.get("id"), uuid);
     }
+
     public static Specification<SecondaryUserDetail> usernameLike(String username) {
         return (root, query, builder) -> builder.like(root.get("username"), "%" + username + "%");
     }

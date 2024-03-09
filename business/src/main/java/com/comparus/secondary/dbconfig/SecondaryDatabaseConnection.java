@@ -16,46 +16,46 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories(
-		entityManagerFactoryRef = "secondaryEntityManagerFactory",
-		transactionManagerRef = "secondaryTransactionManager",
-		basePackages = {"com.comparus.secondary.repo"}
-		)
+        entityManagerFactoryRef = "secondaryEntityManagerFactory",
+        transactionManagerRef = "secondaryTransactionManager",
+        basePackages = {"com.comparus.secondary.repo"}
+)
 public class SecondaryDatabaseConnection {
-		
-	@Value("${spring.secondary.datasource.url}")
+
+    @Value("${spring.secondary.datasource.url}")
     private String url;
-	
-	@Value("${spring.secondary.datasource.username}")
+
+    @Value("${spring.secondary.datasource.username}")
     private String username;
-	
-	@Value("${spring.secondary.datasource.password}")
+
+    @Value("${spring.secondary.datasource.password}")
     private String password;
-	
-	
-	@Bean(name = "secondaryDbDataSource")
-	public DataSource secondaryDbDataSource(){
+
+
+    @Bean(name = "secondaryDbDataSource")
+    public DataSource secondaryDbDataSource() {
         return DataSourceBuilder.create()
-        		.url(url)
-        		.username(username)
-        		.password(password)
-        		.build();
+                .url(url)
+                .username(username)
+                .password(password)
+                .build();
     }
-	
-	@Bean(name = "secondaryEntityManagerFactory")
-	public LocalContainerEntityManagerFactoryBean 
-	secondaryEntityManagerFactory(EntityManagerFactoryBuilder builder,
-			@Qualifier("secondaryDbDataSource") DataSource secondaryDataSource) {
-		return builder
-				.dataSource(secondaryDataSource)
-				.packages("com.comparus.secondary.models")
-				.build();
-	}
-	
-	@Bean(name = "secondaryTransactionManager")
-	public PlatformTransactionManager secondaryTransactionManager(
-			@Qualifier("secondaryEntityManagerFactory") EntityManagerFactory
-			secondaryEntityManagerFactory) {
-		return new JpaTransactionManager(secondaryEntityManagerFactory);
-	}
+
+    @Bean(name = "secondaryEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean
+    secondaryEntityManagerFactory(EntityManagerFactoryBuilder builder,
+                                  @Qualifier("secondaryDbDataSource") DataSource secondaryDataSource) {
+        return builder
+                .dataSource(secondaryDataSource)
+                .packages("com.comparus.secondary.models")
+                .build();
+    }
+
+    @Bean(name = "secondaryTransactionManager")
+    public PlatformTransactionManager secondaryTransactionManager(
+            @Qualifier("secondaryEntityManagerFactory") EntityManagerFactory
+                    secondaryEntityManagerFactory) {
+        return new JpaTransactionManager(secondaryEntityManagerFactory);
+    }
 
 }

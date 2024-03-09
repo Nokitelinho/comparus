@@ -11,21 +11,21 @@ import javax.sql.DataSource;
 
 @Configuration
 public class SecondaryDatabaseMigration {
-	
-	@Autowired
-	@Qualifier("secondaryDbDataSource")
-	private DataSource secondaryDatasource;
-	
-	@Value("${spring.flyway.secondary.locations}")
+
+    @Autowired
+    @Qualifier("secondaryDbDataSource")
+    private DataSource secondaryDatasource;
+
+    @Value("${spring.flyway.secondary.locations}")
     private String secondaryLocations;
-	
-	@PostConstruct
-	public void migrateSecondaryDatabase() {
-		Flyway.configure()
-		.dataSource(secondaryDatasource)
-		.locations(secondaryLocations)
-		.load()
-		.migrate();
-	}
+
+    @PostConstruct
+    public void migrateSecondaryDatabase() {
+        Flyway.configure()
+                .dataSource(secondaryDatasource)
+                .locations(secondaryLocations)
+                .load()
+                .migrate();
+    }
 
 }
