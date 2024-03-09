@@ -8,8 +8,8 @@ Unit testing with Junit 5, Integration tests, Maven
 You can also import the code straight into your IDE:
 - IntelliJ IDEA
 <br><br>
-Download and unzip the source repository or clone it using Git: 
-```[a link](git clone https://github.com/Nokitelinho/comparus.git)```
+Download and unzip the source repository or clone it using Git: <br>
+``git clone https://github.com/Nokitelinho/comparus.git``
 
 ## Test the Application
 Using the Maven plugin:<br>
@@ -18,8 +18,9 @@ Using the Maven plugin:<br>
 <br>OR<br>
 run business/src/main/java/com/comparus/Application.java from IntelliJ IDEA
 <br><br>
-Now that the application is running, you can test it. You can load the home page at 
-```[a link](http://localhost:8080/api/v1/users)```
+Now that the application is running, you can test it. You can load the home page at
+
+http://localhost:8080/api/v1/users
 
 You can see first 2 records from DB1 and second 2 records from DB2
 ```
@@ -50,12 +51,12 @@ You can see first 2 records from DB1 and second 2 records from DB2
 ```
 
 You can filter users by id, username, name, surname:<br>
-``` [a link](http://localhost:8080/api/v1/search?name=Andr) ```<br>
-``` [a link](http://localhost:8080/api/v1/search?name=a-login) ```<br>
-``` [a link](http://localhost:8080/api/v1/search?surname=Jo) ```
+http://localhost:8080/api/v1/search?name=Andr<br>
+http://localhost:8080/api/v1/search?name=a-login<br>
+http://localhost:8080/api/v1/search?surname=Jo
 
 ## H2 in memory DB consol
-```[a link](http://localhost:8080/h2-console)```
+http://localhost:8080/h2-console
 - JDBC URL: jdbc:h2:mem:comparus
 - User Name: sa
 <br>
@@ -64,4 +65,4 @@ You can filter users by id, username, name, surname:<br>
 
 ## Swagger 3 UI(with OpenAPI 3)
 
-```[a link](http://localhost:8080/swagger-ui/index.html)```
+http://localhost:8080/swagger-ui/index.html
