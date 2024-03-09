@@ -9,7 +9,7 @@ You can also import the code straight into your IDE:
 - IntelliJ IDEA
 <br><br>
 Download and unzip the source repository or clone it using Git: 
-```git clone https://github.com/Nokitelinho/comparus.git```
+```[a link](git clone https://github.com/Nokitelinho/comparus.git)```
 
 ## Test the Application
 Using the Maven plugin:<br>
@@ -19,7 +19,7 @@ Using the Maven plugin:<br>
 run business/src/main/java/com/comparus/Application.java from IntelliJ IDEA
 <br><br>
 Now that the application is running, you can test it. You can load the home page at 
-```http://localhost:8080/api/v1/users```
+```[a link](http://localhost:8080/api/v1/users)```
 
 You can see first 2 records from DB1 and second 2 records from DB2
 ```
@@ -49,13 +49,13 @@ You can see first 2 records from DB1 and second 2 records from DB2
 }]
 ```
 
-You can filter users by id, username, name, surname:
-``` http://localhost:8080/api/v1/search?name=Andr ```
-``` http://localhost:8080/api/v1/search?name=a-login ```
-``` http://localhost:8080/api/v1/search?surname=Jo ```
+You can filter users by id, username, name, surname:<br>
+``` [a link](http://localhost:8080/api/v1/search?name=Andr) ```<br>
+``` [a link](http://localhost:8080/api/v1/search?name=a-login) ```<br>
+``` [a link](http://localhost:8080/api/v1/search?surname=Jo) ```
 
 ## H2 in memory DB consol
-```http://localhost:8080/h2-console```
+```[a link](http://localhost:8080/h2-console)```
 - JDBC URL: jdbc:h2:mem:comparus
 - User Name: sa
 <br>
@@ -64,4 +64,4 @@ You can filter users by id, username, name, surname:
 
 ## Swagger 3 UI(with OpenAPI 3)
 
-```http://localhost:8080/swagger-ui/index.html```
+```[a link](http://localhost:8080/swagger-ui/index.html)```
