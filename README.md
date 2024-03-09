@@ -15,8 +15,8 @@ Download and unzip the source repository or clone it using Git:
 Using the Maven plugin:<br>
 ``` mvn clean install ```
 ``` mvn spring-boot:run ```
-OR<br>
-run business/src/main/java/com/comparus/Application.java
+<br>OR<br>
+run business/src/main/java/com/comparus/Application.java from IntelliJ IDEA
 <br><br>
 Now that the application is running, you can test it. You can load the home page at 
 ```http://localhost:8080/api/v1/users```
