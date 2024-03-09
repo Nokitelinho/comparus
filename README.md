@@ -15,7 +15,9 @@ Download and unzip the source repository or clone it using Git:
 Using the Maven plugin:<br>
 ``` mvn clean install ```
 ``` mvn spring-boot:run ```
-
+OR<br>
+run business/src/main/java/com/comparus/Application.java
+<br><br>
 Now that the application is running, you can test it. You can load the home page at 
 ```http://localhost:8080/api/v1/users```
 ```
@@ -50,11 +52,11 @@ You can filter users by id, username, name, surname:
 ``` http://localhost:8080/api/v1/search?name=a-login ```
 ``` http://localhost:8080/api/v1/search?surname=Jo ```
 
-## H2 in memoru DB consol
+## H2 in memory DB consol
 ```http://localhost:8080/h2-console```
 - JDBC URL: jdbc:h2:mem:comparus
 - User Name: sa
-
+<br>
 - JDBC URL: jdbc:h2:mem:comparus2
 - USer Name: sa
 
