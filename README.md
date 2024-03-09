@@ -14,12 +14,14 @@ Download and unzip the source repository or clone it using Git:
 ## Test the Application
 Using the Maven plugin:<br>
 ``` mvn clean install ```
-``` mvn spring-boot:run ```
+``` mvn spring-boot:run -pl business```
 <br>OR<br>
 run business/src/main/java/com/comparus/Application.java from IntelliJ IDEA
 <br><br>
 Now that the application is running, you can test it. You can load the home page at 
 ```http://localhost:8080/api/v1/users```
+
+You can see first 2 records from DB1 and second 2 records from DB2
 ```
 [{
 "id": "035670f0-5d53-4691-b72c-4f969a10edc6",
