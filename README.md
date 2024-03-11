@@ -59,7 +59,7 @@ Also sorting available by username, name, surname:<br>
 http://localhost:8080/api/v1/users?sort=username&order=desc<br>
 http://localhost:8080/api/v1/users?sort=username&order=asc<br>
 http://localhost:8080/api/v1/users?sort=name&order=desc<br>
-http://localhost:8080/api/v1/users?sort=nae&order=asc<br>
+http://localhost:8080/api/v1/users?sort=name&order=asc<br>
 
 
 ## H2 in memory DB consol
