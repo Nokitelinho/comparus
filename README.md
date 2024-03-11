@@ -50,10 +50,17 @@ You can see first 2 records from DB1 and second 2 records from DB2
 }]
 ```
 
-You can filter users by id, username, name, surname:<br>
+You can filter and sorting users by id, username, name, surname:<br>
 http://localhost:8080/api/v1/search?name=Andr<br>
 http://localhost:8080/api/v1/search?name=a-login<br>
-http://localhost:8080/api/v1/search?surname=Jo
+http://localhost:8080/api/v1/search?surname=Jo<br>
+<br>
+Also sorting available by username, name, surname:<br>
+http://localhost:8080/api/v1/users?sort=username&order=desc<br>
+http://localhost:8080/api/v1/users?sort=username&order=asc<br>
+http://localhost:8080/api/v1/users?sort=name&order=desc<br>
+http://localhost:8080/api/v1/users?sort=nae&order=asc<br>
+
 
 ## H2 in memory DB consol
 http://localhost:8080/h2-console
