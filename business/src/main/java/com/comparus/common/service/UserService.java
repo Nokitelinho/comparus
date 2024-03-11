@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
-    List<UserModel> findAll();
+    List<UserModel> findAll(String sort, String order);
 
-    List<UserModel> findUser(UUID uuid, String username, String name, String surname);
+    List<UserModel> findUser(UUID uuid, String username, String name, String surname, String sort, String order);
 }

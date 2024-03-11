@@ -19,8 +19,8 @@ public class UserController implements UserWebApi {
     private final UserService userService;
 
     @GetMapping("/users")
-    public List<UserModel> findAll() {
-        return userService.findAll();
+    public List<UserModel> findAll(@RequestParam(required = false) String sort, @RequestParam(required = false) String order) {
+        return userService.findAll(sort, order);
     }
 
     @GetMapping("/search")
@@ -28,8 +28,10 @@ public class UserController implements UserWebApi {
             @RequestParam(required = false) UUID uuid,
             @RequestParam(required = false) String username,
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) String surname) {
-        return userService.findUser(uuid, username, name, surname);
+            @RequestParam(required = false) String surname,
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) String order) {
+        return userService.findUser(uuid, username, name, surname, sort, order);
     }
 
 }

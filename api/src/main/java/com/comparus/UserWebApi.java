@@ -11,12 +11,16 @@ import java.util.UUID;
 @RequestMapping("/api/v1")
 public interface UserWebApi {
     @GetMapping("/users")
-    List<UserModel> findAll();
+    List<UserModel> findAll(
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) String order);
 
     @GetMapping("/search")
     List<UserModel> findUser(
             @RequestParam(required = false) UUID uuid,
             @RequestParam(required = false) String username,
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) String surname);
+            @RequestParam(required = false) String surname,
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) String order);
 }
