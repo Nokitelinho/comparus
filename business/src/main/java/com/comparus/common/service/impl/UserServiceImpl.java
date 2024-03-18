@@ -1,41 +1,69 @@
 package com.comparus.common.service.impl;
 
+import com.comparus.common.configuration.ConfigProperties;
+import com.comparus.common.configuration.Datasource;
+import com.comparus.common.dao.UserDAO;
+import com.comparus.common.dao.impl.UserDAOImpl;
 import com.comparus.common.service.UserService;
 import com.comparus.model.UserModel;
-import com.comparus.primary.component.PrimaryUserComponent;
-import com.comparus.secondary.component.SecondaryUserComponent;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private final PrimaryUserComponent primaryUserComponent;
-    private final SecondaryUserComponent secondaryUserComponent;
+    private final ConfigProperties configProperties;
 
     @Override
     public List<UserModel> findAll(String sort, String order) {
-        var primaryUserList = primaryUserComponent.findAll();
-        var secondaryUserList = secondaryUserComponent.findAll();
-        var userModels = Stream.concat(primaryUserList.stream(), secondaryUserList.stream()).toList();
+        var datasourceList = configProperties.getDatasource();
 
-        return userModelList(userModels, sort, order);
+        List<UserModel> userModels = datasourceList.stream()
+                .map(this::getUserDAO)
+                .map(UserDAO::getAllUsers)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        return sortUserModels(userModels, sort, order);
     }
 
     @Override
-    public List<UserModel> findUser(UUID uuid, String username, String name, String surname, String sort, String order) {
-        var primaryUserList = primaryUserComponent.findUser(uuid, username, name, surname);
-        var secondaryUserList = secondaryUserComponent.findUser(uuid, username, name, surname);
-        var userModels = Stream.concat(primaryUserList.stream(), secondaryUserList.stream()).toList();
+    public List<UserModel> findUser(Long id, String username, String sort, String order) {
+        if (Objects.nonNull(id)) return findById(id, sort, order);
+        if (Objects.nonNull(username)) return findByUserName(username, sort, order);
 
-        return userModelList(userModels, sort, order);
+        return new ArrayList<>();
     }
 
-    private List<UserModel> userModelList(List<UserModel> userModels, String sort, String order) {
+    private List<UserModel> findById(Long id, String sort, String order) {
+        var datasourceList = configProperties.getDatasource();
+
+        List<UserModel> userModels = datasourceList.stream()
+                .map(this::getUserDAO)
+                .map(u->u.findById(id))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        return sortUserModels(userModels, sort, order);
+    }
+
+    private List<UserModel> findByUserName(String username, String sort, String order) {
+        var datasourceList = configProperties.getDatasource();
+
+        List<UserModel> userModels = datasourceList.stream()
+                .map(this::getUserDAO)
+                .map(u->u.findByUserName(username))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        return sortUserModels(userModels, sort, order);
+    }
+
+    private List<UserModel> sortUserModels(List<UserModel> userModels, String sort, String order) {
         var sortOrder = Objects.nonNull(order) && order.equals("asc") ? "asc" : "desc";
 
         if (Objects.nonNull(sort)) {
@@ -65,6 +93,20 @@ public class UserServiceImpl implements UserService {
         return userModels.stream()
                 .sorted(compareBy)
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private UserDAO getUserDAO(Datasource datasource) {
+
+        var ds = DataSourceBuilder.create()
+                .url(datasource.getUrl())
+                .username(datasource.getUsername())
+                .password(datasource.getPassword())
+                .build();
+
+        var userDAO = new UserDAOImpl();
+        userDAO.setDataSource(ds);
+
+        return userDAO;
     }
 
 }
