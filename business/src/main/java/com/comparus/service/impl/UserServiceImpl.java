@@ -3,7 +3,6 @@ package com.comparus.service.impl;
 import com.comparus.configuration.ConfigProperties;
 import com.comparus.configuration.Datasource;
 import com.comparus.dao.UserDAO;
-import com.comparus.dao.impl.UserDAOImpl;
 import com.comparus.model.UserModel;
 import com.comparus.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
         List<UserModel> userModels = datasourceList.stream()
                 .map(this::getUserDAO)
-                .map(dao->dao.jdbcQuery(id, username))
+                .map(dao->dao.findUser(id, username))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
 
@@ -70,11 +69,7 @@ public class UserServiceImpl implements UserService {
                 .password(datasource.getPassword())
                 .build();
 
-
-        var userDao = new UserDAOImpl();
-        userDao.setDataSource(ds);
-
-        return userDao;
+        return new UserDAO(ds);
     }
 
 }
