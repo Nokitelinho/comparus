@@ -18,45 +18,12 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final ConfigProperties configProperties;
 
-    @Override
-    public List<UserModel> getAllUsers(String sort, String order) {
+    public List<UserModel> findUsers(Long id, String username, String sort, String order) {
         var datasourceList = configProperties.getDatasource();
 
         List<UserModel> userModels = datasourceList.stream()
                 .map(this::getUserDAO)
-                .map(UserDAO::getAllUsers)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
-
-        return sortUserModels(userModels, sort, order);
-    }
-
-    @Override
-    public List<UserModel> findUser(Long id, String username, String sort, String order) {
-        if (Objects.nonNull(id)) return findById(id, sort, order);
-        if (Objects.nonNull(username)) return findByUserName(username, sort, order);
-
-        return new ArrayList<>();
-    }
-
-    private List<UserModel> findById(Long id, String sort, String order) {
-        var datasourceList = configProperties.getDatasource();
-
-        List<UserModel> userModels = datasourceList.stream()
-                .map(this::getUserDAO)
-                .map(u->u.findById(id))
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
-
-        return sortUserModels(userModels, sort, order);
-    }
-
-    private List<UserModel> findByUserName(String username, String sort, String order) {
-        var datasourceList = configProperties.getDatasource();
-
-        List<UserModel> userModels = datasourceList.stream()
-                .map(this::getUserDAO)
-                .map(u->u.findByUserName(username))
+                .map(dao->dao.jdbcQuery(id, username))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
 

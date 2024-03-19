@@ -5,10 +5,5 @@ import com.comparus.model.UserModel;
 import java.util.List;
 
 public interface UserDAO {
-
-    List<UserModel> findById(Long id);
-
-    List<UserModel> findByUserName(String login);
-
-    List<UserModel> getAllUsers();
+    List<UserModel> jdbcQuery(Long id, String login);
 }

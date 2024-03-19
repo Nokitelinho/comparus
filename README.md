@@ -51,8 +51,8 @@ You can see first 2 records from DB1 and second 2 records from DB2
 ```
 
 You can filter and sorting users by id, username, name, surname:<br>
-http://localhost:8080/api/v1/search?id=1<br>
-http://localhost:8080/api/v1/search?username=b<br>
+http://localhost:8080/api/v1/users?id=1<br>
+http://localhost:8080/api/v1/users?username=b<br>
 <br>
 Also sorting available by username, name, surname:<br>
 http://localhost:8080/api/v1/users?sort=username&order=desc<br>

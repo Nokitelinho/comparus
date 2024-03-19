@@ -14,15 +14,8 @@ class UserServiceTest {
     UserService userService;
 
     @Test
-    void shouldFindAllUsers() {
-        var userList = userService.getAllUsers(null, null);
-
-        assertThat(userList).hasSize(6);
-    }
-
-    @Test
     void shouldFindUserBySpecification() {
-        var userList = userService.findUser(null, "a-login-t1", null, null);
+        var userList = userService.findUsers(null, "a-login-t1", null, null);
 
         assertThat(userList.stream().toList())
                 .hasSize(1)
