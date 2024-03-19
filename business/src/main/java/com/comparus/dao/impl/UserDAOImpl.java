@@ -30,7 +30,6 @@ public class UserDAOImpl implements UserDAO {
             queryArgs.add("%" + username + "%");
         }
 
-        /* this is the part I used from the above stackoverflow question */
         Object[] preparedStatementArgs = new Object[queryArgs.size()];
         for(int i = 0; i < preparedStatementArgs.length; i++){
             preparedStatementArgs[i] = queryArgs.get(i);
