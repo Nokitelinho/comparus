@@ -1,22 +1,21 @@
-package com.comparus.dao;
+package com.comparus.repository;
 
+import com.comparus.configuration.Datasource;
 import com.comparus.mapper.UserMapper;
 import com.comparus.model.UserModel;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class UserDAO {
-    private JdbcTemplate jdbcTemplate;
+@Repository
+public class UserRepository {
 
-    public UserDAO(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
-
-    public List<UserModel> findUser(Long id, String username) {
+    public List<UserModel> findUser(Datasource datasource, Long id, String username) {
         StringBuilder sqlQuery = new StringBuilder("Select * from user_detail where 1=1 ");
         List<String> queryArgs = new ArrayList<>();
 
@@ -35,6 +34,15 @@ public class UserDAO {
         }
 
 
-        return jdbcTemplate.query(sqlQuery.toString(), preparedStatementArgs, new UserMapper());
+        return new JdbcTemplate(getDataSource(datasource))
+                .query(sqlQuery.toString(), preparedStatementArgs, new UserMapper());
+    }
+
+    private DataSource getDataSource(Datasource datasource) {
+        return DataSourceBuilder.create()
+                .url(datasource.getUrl())
+                .username(datasource.getUsername())
+                .password(datasource.getPassword())
+                .build();
     }
 }

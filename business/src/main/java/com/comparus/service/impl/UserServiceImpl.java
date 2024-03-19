@@ -1,12 +1,10 @@
 package com.comparus.service.impl;
 
 import com.comparus.configuration.ConfigProperties;
-import com.comparus.configuration.Datasource;
-import com.comparus.dao.UserDAO;
+import com.comparus.repository.UserRepository;
 import com.comparus.model.UserModel;
 import com.comparus.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -16,13 +14,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final ConfigProperties configProperties;
+    private final UserRepository userRepository;
 
     public List<UserModel> findUser(Long id, String username, String sort, String order) {
         var datasourceList = configProperties.getDatasource();
 
         List<UserModel> userModels = datasourceList.stream()
-                .map(this::getUserDAO)
-                .map(dao->dao.findUser(id, username))
+                .map(datasource -> userRepository.findUser(datasource, id, username))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
 
@@ -59,17 +57,6 @@ public class UserServiceImpl implements UserService {
         return userModels.stream()
                 .sorted(compareBy)
                 .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    private UserDAO getUserDAO(Datasource datasource) {
-
-        var ds = DataSourceBuilder.create()
-                .url(datasource.getUrl())
-                .username(datasource.getUsername())
-                .password(datasource.getPassword())
-                .build();
-
-        return new UserDAO(ds);
     }
 
 }
