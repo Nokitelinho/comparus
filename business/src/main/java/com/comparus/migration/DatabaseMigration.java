@@ -1,17 +1,17 @@
-package com.comparus.common.migration;
+package com.comparus.migration;
 
-import com.comparus.common.configuration.ConfigProperties;
+import com.comparus.configuration.ConfigProperties;
 import jakarta.annotation.PostConstruct;
 import org.flywaydb.core.Flyway;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class PrimaryDatabaseMigration {
+public class DatabaseMigration {
 
     private final ConfigProperties configProperties;
 
-    public PrimaryDatabaseMigration(ConfigProperties configProperties) {
+    public DatabaseMigration(ConfigProperties configProperties) {
         this.configProperties = configProperties;
     }
 

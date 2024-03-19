@@ -1,10 +1,10 @@
-package com.comparus.common.service.impl;
+package com.comparus.service.impl;
 
-import com.comparus.common.configuration.ConfigProperties;
-import com.comparus.common.configuration.Datasource;
-import com.comparus.common.dao.UserDAO;
-import com.comparus.common.dao.impl.UserDAOImpl;
-import com.comparus.common.service.UserService;
+import com.comparus.configuration.ConfigProperties;
+import com.comparus.configuration.Datasource;
+import com.comparus.dao.UserDAO;
+import com.comparus.dao.impl.UserDAOImpl;
+import com.comparus.service.UserService;
 import com.comparus.model.UserModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     private final ConfigProperties configProperties;
 
     @Override
-    public List<UserModel> findAll(String sort, String order) {
+    public List<UserModel> getAllUsers(String sort, String order) {
         var datasourceList = configProperties.getDatasource();
 
         List<UserModel> userModels = datasourceList.stream()

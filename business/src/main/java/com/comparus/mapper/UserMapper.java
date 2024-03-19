@@ -1,4 +1,4 @@
-package com.comparus.common.mapper;
+package com.comparus.mapper;
 
 import com.comparus.model.UserModel;
 import org.springframework.jdbc.core.RowMapper;

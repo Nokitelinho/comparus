@@ -1,7 +1,7 @@
-package com.comparus.common.controller;
+package com.comparus.controller;
 
 import com.comparus.UserWebApi;
-import com.comparus.common.service.UserService;
+import com.comparus.service.UserService;
 import com.comparus.model.UserModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +21,12 @@ public class UserController implements UserWebApi {
     public List<UserModel> findAll(
             @RequestParam(required = false) String sort,
             @RequestParam(required = false) String order) {
-        return userService.findAll(sort, order);
+        return userService.getAllUsers(sort, order);
     }
 
     @GetMapping("/search")
     public List<UserModel> findUser(
-            Long id,
+            @RequestParam(required = false) Long id,
             @RequestParam(required = false) String username,
             @RequestParam(required = false) String sort,
             @RequestParam(required = false) String order) {

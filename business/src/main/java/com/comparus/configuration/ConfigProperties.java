@@ -1,4 +1,4 @@
-package com.comparus.common.configuration;
+package com.comparus.configuration;
 
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

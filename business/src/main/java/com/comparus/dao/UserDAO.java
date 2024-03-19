@@ -1,4 +1,4 @@
-package com.comparus.common.dao;
+package com.comparus.dao;
 
 import com.comparus.model.UserModel;
 

@@ -1,7 +1,7 @@
-package com.comparus.common.dao.impl;
+package com.comparus.dao.impl;
 
-import com.comparus.common.dao.UserDAO;
-import com.comparus.common.mapper.UserMapper;
+import com.comparus.dao.UserDAO;
+import com.comparus.mapper.UserMapper;
 import com.comparus.model.UserModel;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -28,10 +28,6 @@ public class UserDAOImpl implements UserDAO {
     }
 
     public List<UserModel> getAllUsers() {
-        return jdbcTemplate.query(SQL_GET_ALL, new UserMapper());
-    }
-
-    public List<UserModel> findUser() {
         return jdbcTemplate.query(SQL_GET_ALL, new UserMapper());
     }
 }
