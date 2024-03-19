@@ -28,14 +28,14 @@ class UserControllerTest {
 
     @Test
     void shouldReturnAllUsers() {
-        String expected = "1";
+        String expected = "11";
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/api/v1/users",
                 String.class)).contains(expected);
     }
 
     @Test
     void shouldFindUserByID() {
-        String id = "1";
+        String id = "11";
         String expected = "Andrew";
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/api/v1/users?id=" + id,
                 String.class)).contains(expected);

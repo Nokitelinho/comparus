@@ -15,7 +15,7 @@ class UserServiceTest {
 
     @Test
     void shouldFindUserBySpecification() {
-        var userList = userService.findUsers(null, "a-login-t1", null, null);
+        var userList = userService.findUser(null, "a-login-t1", null, null);
 
         assertThat(userList.stream().toList())
                 .hasSize(1)

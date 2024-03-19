@@ -23,7 +23,7 @@ public class UserController implements UserWebApi {
             @RequestParam(required = false) String username,
             @RequestParam(required = false) String sort,
             @RequestParam(required = false) String order) {
-        return userService.findUsers(id, username, sort, order);
+        return userService.findUser(id, username, sort, order);
     }
 
 }

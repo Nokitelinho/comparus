@@ -20,6 +20,6 @@ class ConfigPropertiesTest {
         assertThat(datasourceList.stream().toList())
                 .hasSize(3)
                 .extracting(Datasource::getUrl)
-                .containsExactlyInAnyOrder("jdbc:h2:mem:comparus", "jdbc:h2:mem:comparus2", "jdbc:h2:mem:comparus3");
+                .containsExactlyInAnyOrder("jdbc:h2:mem:comparustest", "jdbc:h2:mem:comparustest2", "jdbc:h2:mem:comparustest3");
     }
 }

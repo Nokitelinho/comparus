@@ -4,8 +4,8 @@ import com.comparus.configuration.ConfigProperties;
 import com.comparus.configuration.Datasource;
 import com.comparus.dao.UserDAO;
 import com.comparus.dao.impl.UserDAOImpl;
-import com.comparus.service.UserService;
 import com.comparus.model.UserModel;
+import com.comparus.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final ConfigProperties configProperties;
 
-    public List<UserModel> findUsers(Long id, String username, String sort, String order) {
+    public List<UserModel> findUser(Long id, String username, String sort, String order) {
         var datasourceList = configProperties.getDatasource();
 
         List<UserModel> userModels = datasourceList.stream()
@@ -70,10 +70,11 @@ public class UserServiceImpl implements UserService {
                 .password(datasource.getPassword())
                 .build();
 
-        var userDAO = new UserDAOImpl();
-        userDAO.setDataSource(ds);
 
-        return userDAO;
+        var userDao = new UserDAOImpl();
+        userDao.setDataSource(ds);
+
+        return userDao;
     }
 
 }
