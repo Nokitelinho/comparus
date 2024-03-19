@@ -37,7 +37,7 @@ class UserControllerTest {
     void shouldFindUserByID() {
         String id = "1";
         String expected = "Andrew";
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/api/v1/search?id=" + id,
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/api/v1/users?id=" + id,
                 String.class)).contains(expected);
     }
 
@@ -45,7 +45,7 @@ class UserControllerTest {
     void shouldFindUserByUsername() {
         String username = "a";
         String expected = "Andrew";
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/api/v1/search?username=" + username,
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/api/v1/users?username=" + username,
                 String.class)).contains(expected);
     }
 }
